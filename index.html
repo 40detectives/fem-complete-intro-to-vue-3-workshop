@@ -4,7 +4,76 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Single's Inferno S02</title>
   </head>
-  <body></body>
+  <body>
+    <div id="app">
+      <p v-if="cast.length === 0">There are no characters</p>
+      <ul v-else-if="cast.length % 2 === 1">
+        <li v-for="character in cast"> {{ character.name }}</li>
+      </ul>
+      <p v-else>
+        There are odd characters 🥁
+      </p>
+      <hr>
+      <p><span v-for="(character, index) in cast">{{ character.name}}{{ index === cast.length -1 ? '' : ', '}} </span></p>
+    </div>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script>
+      const app = Vue.createApp({
+        data: () => ({
+          cast: [
+            {
+              name: 'Shin Seul Gi',
+              koreanName: "신슬기",
+              gender: 'girl'
+            },
+            {
+              name: 'Park Se Jung',
+              koreanName: "박세정",
+              gender: 'girl'
+            },
+            {
+              name: 'Lee So E',
+              koreanName: "이소이",
+              gender: 'girl'
+            },
+            {
+              name: 'Lee Na Din',
+              koreanName: "이나딘",
+              gender: 'girl'
+            },
+            {
+              name: 'Choi Seo Eun',
+              koreanName: "최서은",
+              gender: 'girl'
+            },
+            // ! ! ! //
+            {
+              name: 'Choi Jong Woo',
+              koreanName: "최종우",
+              gender: 'boy',
+            },
+            {
+              name: 'Jo Yung Jae',
+              koreanName: "조융재",
+              gender: 'boy',
+            },
+            {
+              name: 'Kim Han Bin',
+              koreanName: "김한빈",
+              gender: 'boy',
+            },
+            {
+              name: 'Shin Dong Woo',
+              koreanName: "신동우",
+              gender: 'boy',
+            },
+          ],
+        }),
+      });
+      
+      app.mount('#app');
+    </script>
+  </body>
 </html>
