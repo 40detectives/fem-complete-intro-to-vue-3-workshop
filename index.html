@@ -8,20 +8,60 @@
   </head>
   <body>
     <div id="app">
+      <h1>Single's Inferno S02</h1>
+      <h2>Cast</h2>
       <p v-if="cast.length === 0">There are no characters</p>
       <ul v-else-if="cast.length % 2 === 1">
-        <li v-for="character in cast"> {{ character.name }}</li>
+        <li v-for="character in cast">
+          <span>{{ character.name }}</span>
+          <button v-on:click="makeFav(character)">❤️ Fav</button>
+        </li> 
       </ul>
       <p v-else>
-        There are odd characters 🥁
+        There are even characters 🥁
       </p>
-      <hr>
+      <h2>Fav Characters</h2>
+      <ul v-if="favList.length > 0">
+        <li v-for="character in favList">
+          <span>{{ character }}</span>
+        </li>
+      </ul>
+      <p v-else>No favorite characters now</p>
+
+      <hr />
+
+      <h2>Add a new Character</h2>
+      <form action="" v-on:submit.prevent="addNewCharacter">
+        <pre>{{ newCharacter }}</pre>
+        <label>
+          Name:
+          <input type="text" v-model="newCharacter.name">
+        </label>
+        <label>
+          Korean Name:
+          <input type="text" v-model="newCharacter.koreanName">
+        </label>
+        <label>
+          Gender:
+          <input type="text" v-model="newCharacter.gender">
+        </label>
+        <button type="submit">Add New Character</button>
+      </form>
+
+      <hr />
+
+      <h2>Example of a "v-for" with names joined by commas in between</h2>
       <p><span v-for="(character, index) in cast">{{ character.name}}{{ index === cast.length -1 ? '' : ', '}} </span></p>
     </div>
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     <script>
       const app = Vue.createApp({
         data: () => ({
+          newCharacter: {
+            name: '(Anonymous)',
+            koreanName: '(?)',
+            gender: 'fluid',
+          },
           cast: [
             {
               name: 'Shin Seul Gi',
@@ -70,7 +110,25 @@
               gender: 'boy',
             },
           ],
+          favList: [],
         }),
+        methods:{
+          makeFav(character) {
+            if (this.favList.includes(character)) {
+              this.favList = this.favList.filter((fav) => fav !== character);
+            } else {
+              this.favList.push(character);
+            }
+          },
+          addNewCharacter(){
+            this.cast.push(this.newCharacter);
+            this.newCharacter = {
+              name: '(Anonymous)',
+              koreanName: '(?)',
+              gender: 'fluid',
+            };
+          }
+        }
       });
       
       app.mount('#app');
