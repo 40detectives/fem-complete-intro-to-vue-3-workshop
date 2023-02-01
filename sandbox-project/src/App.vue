@@ -2,8 +2,6 @@
 export default {
   data() {
     return {
-      count: 10,
-      incrementAmount: 8,
       message: "Hello it works",
       listOfItems: [
         {
@@ -34,25 +32,10 @@ export default {
       ],
     };
   },
-  methods: {
-    incrementCount(newAmount, event) {
-      console.log(newAmount);
-      console.log(event);
-      this.count += this.incrementAmount;
-    },
-  },
 };
 </script>
 
 <template>
-  <h1>Counter</h1>
-  <p :data-increment-by="incrementAmount">{{ count }}</p>
-  <button @click="incrementCount">Increment Count</button>
-  <h1>{{ incrementAmount }}</h1>
-  <div>
-    <label for="incrementAmount">Increment by:</label>
-    <input type="text" v-model="incrementAmount" />
-  </div>
   <hr />
   <p v-if="message.length % 2 === 0">Even: {{ message.toUpperCase() }}</p>
   <p v-else>Odd: {{ message }}</p>
